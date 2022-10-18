@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>html-1</h1>
+  <div>
+    <button onclick="send(Math.random(1))">发送数据给html2</button>
+  </div>
+  <iframe src="http://127.0.0.1:3000/index2.html" frameborder="0"></iframe>
+  <script>
+    const iframe = document.querySelector("iframe");
+    let send;
+    iframe.onload = function () {
+      // 获取iframe的window对象
+      const iWindow = iframe.contentWindow;
+      // 获取iframe的document对象
+      const iDocument = iframe.contentDocument;
+      send = function (value) {
+        iWindow.receive(value)
+      }
+    }
+    function receive(value) {
+      console.log("这是html1,来了一条数据：", value)
+    }
+  </script>
+</body>
+
+</html>
